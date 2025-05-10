@@ -1,0 +1,19 @@
+ui_print("-------------------------------");
+ui_print("         KKRT REPART          ");
+ui_print("-------------------------------");
+
+ui_print("-------------------------------");
+ui_print("Credits: Smiley9000, Neel0210");
+ui_print("-------------------------------");
+#
+ui_print(">>Repartition Script for A226B <<");
+ui_print("Created by Smiley9000, Neel0210");
+#
+ui_print("Mounting temporary directory...");
+package_extract_dir("scripts", "/tmp/scripts");
+#
+set_perm(0, 0, 0777, "/tmp/scripts/repart.sh");
+ui_print("Running repart.sh...");
+run_program("/tmp/scripts/repart.sh");
+#
+ui_print("Repartition complete.");

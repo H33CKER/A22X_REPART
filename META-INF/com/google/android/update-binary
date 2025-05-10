@@ -1,0 +1,4 @@
+#!/sbin/sh
+# Minimal TWRP shell-based update-binary
+
+/bin/sh "$2"
