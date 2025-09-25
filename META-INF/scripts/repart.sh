@@ -1,25 +1,22 @@
 #!/sbin/sh
 
-# KKRT A226B Repartition Script
-# Author: smiley9000 & Neel0210
+# A226B Super Partition Resize Script
+# Author: smiley9000 & Neel0210 (modified by H3CKER)
 
-# Delete unwanted partitions
-/system/bin/sgdisk --delete 58 /dev/block/mmcblk0
-/system/bin/sgdisk --delete 49 /dev/block/mmcblk0
-/system/bin/sgdisk --delete 48 /dev/block/mmcblk0
-/system/bin/sgdisk --delete 50 /dev/block/mmcblk0
-/system/bin/sgdisk --delete 51 /dev/block/mmcblk0
-/system/bin/sgdisk --delete 52 /dev/block/mmcblk0
-/system/bin/sgdisk --delete 53 /dev/block/mmcblk0
-/system/bin/sgdisk --delete 54 /dev/block/mmcblk0
+# Find the partition number for "super"
+SUPER_NUM=$(/system/bin/sgdisk --print /dev/block/mmcblk0 | grep -i "super" | awk '{print $1}')
 
-# Create new partitions
-/system/bin/sgdisk --new=0:0:+706Mib --typecode=0:11 --change-name=0:prism /dev/block/mmcblk0
-/system/bin/sgdisk --new=0:0:+25Mib --typecode=0:11 --change-name=0:optics /dev/block/mmcblk0
-/system/bin/sgdisk --new=0:0:+200Mib --typecode=0:11 --change-name=0:cache /dev/block/mmcblk0
-/system/bin/sgdisk --new=0:0:+50Mib --typecode=0:11 --change-name=0:omr /dev/block/mmcblk0
-/system/bin/sgdisk --new=0:0:+50Mib --typecode=0:11 --change-name=0:spu /dev/block/mmcblk0
-/system/bin/sgdisk --new=0:0:+11200Mib --typecode=0:11 --change-name=0:super /dev/block/mmcblk0
-/system/bin/sgdisk --new=0:0: --typecode=0:11 --change-name=0:userdata /dev/block/mmcblk0
+# Safety check
+if [ -z "$SUPER_NUM" ]; then
+    echo "Error: Could not find super partition!" >&2
+    exit 1
+fi
+
+# Resize the super partition to 11200MiB (adjust as needed)
+# This keeps the same start sector and only adjusts the end
+/system/bin/sgdisk --resize=$SUPER_NUM:+11200Mib /dev/block/mmcblk0
+
+# Print new table for verification
+/system/bin/sgdisk --print /dev/block/mmcblk0
 
 exit 0

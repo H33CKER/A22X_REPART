@@ -19,14 +19,9 @@ This repository contains a flashable ZIP that **repartitions Samsung Galaxy A22 
 ## 📜 What It Does
 
 1. **Deletes** legacy partitions:
-   - `prism`, `optics`, `omr`, `spu`, `cache`, etc.
+   - `super`
 
 2. **Creates** new partitions:
-   - `prism` → `706 MiB`
-   - `optics` → `25 MiB`
-   - `cache` → `200 MiB`
-   - `omr` → `50 MiB`
-   - `spu` → `50 MiB`
    - `super` → `11200 MiB`
    - `userdata` → remaining space
 
@@ -43,7 +38,7 @@ This repository contains a flashable ZIP that **repartitions Samsung Galaxy A22 
 
 ## ⚠️ Caution
 
-- This **erases and recreates partitions**. You will lose data on affected partitions.
+- This **erases and recreates partitions**. You will lose data on affected partitions. (will need to reflash super.img)
 - Make a **full backup** before flashing.
 - This is only tested on **Samsung Galaxy A226B** — using it on other devices will **likely brick** them.
 - Ensure your recovery supports `/system/bin/sgdisk` (most recent TWRP builds do).
@@ -60,8 +55,8 @@ This repository contains a flashable ZIP that **repartitions Samsung Galaxy A22 
 
 ## 👨‍💻 Credits
 
-- Developed by **smiley9000 & Neel0210** 😄  
-- Device testing & support: **Neel0210**
+- Developed by **smiley9000 & Neel0210** Tweaked by H3CKER 😄  
+- Device testing & support: **Neel0210** 
 
 ---
 
